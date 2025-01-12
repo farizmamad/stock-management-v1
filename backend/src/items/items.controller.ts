@@ -2,17 +2,16 @@ import {
   Body,
   Controller,
   Get,
-  Param,
   Post,
   Query,
   UseInterceptors,
 } from '@nestjs/common';
+import { ErrorsInterceptor } from 'src/interceptors/error.interceptor';
 import { PaginationInputDto } from 'src/utils/pagination/pagination.dto';
+import { PaginationQuery } from 'src/utils/pagination/pagination.query';
 import { CreateItemDto } from './dto/create-item.dto';
 import { FindAllItemsDto } from './dto/find-all-items.dto';
 import { ItemsService } from './items.service';
-import { ErrorsInterceptor } from 'src/interceptors/error.interceptor';
-import { PaginationQuery } from 'src/utils/pagination/pagination.query';
 
 @Controller('items')
 @UseInterceptors(ErrorsInterceptor)

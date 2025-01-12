@@ -9,6 +9,15 @@ CREATE TABLE "BatchItem" (
 );
 
 -- CreateTable
+CREATE TABLE "Item" (
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "item_code" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "uom" TEXT NOT NULL,
+    "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+-- CreateTable
 CREATE TABLE "StockEntry" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "entry_id" TEXT NOT NULL,
@@ -38,33 +47,19 @@ CREATE TABLE "StockLedger" (
     "batch_id" TEXT NOT NULL,
     "tanggal" DATETIME NOT NULL,
     "last_stock" INTEGER NOT NULL,
-    "qty_in" INTEGER NOT NULL,
-    "qty_out" INTEGER NOT NULL,
+    "qty_in" INTEGER,
+    "qty_out" INTEGER,
     "current_stock" INTEGER NOT NULL,
     "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT "StockLedger_item_code_fkey" FOREIGN KEY ("item_code") REFERENCES "Item" ("item_code") ON DELETE RESTRICT ON UPDATE CASCADE,
     CONSTRAINT "StockLedger_batch_id_fkey" FOREIGN KEY ("batch_id") REFERENCES "BatchItem" ("batch_id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
--- RedefineTables
-PRAGMA defer_foreign_keys=ON;
-PRAGMA foreign_keys=OFF;
-CREATE TABLE "new_Item" (
-    "id" TEXT NOT NULL PRIMARY KEY,
-    "item_code" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
-    "uom" TEXT NOT NULL,
-    "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-INSERT INTO "new_Item" ("id", "item_code", "name", "uom") SELECT "id", "item_code", "name", "uom" FROM "Item";
-DROP TABLE "Item";
-ALTER TABLE "new_Item" RENAME TO "Item";
-CREATE UNIQUE INDEX "Item_item_code_key" ON "Item"("item_code");
-PRAGMA foreign_keys=ON;
-PRAGMA defer_foreign_keys=OFF;
-
 -- CreateIndex
 CREATE UNIQUE INDEX "BatchItem_batch_id_key" ON "BatchItem"("batch_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Item_item_code_key" ON "Item"("item_code");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "StockEntry_entry_id_key" ON "StockEntry"("entry_id");

@@ -1,13 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { Prisma, StockEntryType } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateStockEntryDto } from './dto/create-stock-entry.dto';
 
 @Injectable()
 export class StockEntriesService {
-  constructor(
-    private prisma: PrismaService,
-  ) {}
+  constructor(private prisma: PrismaService) {}
 
   async create(data: CreateStockEntryDto) {
     return await this.prisma.$transaction(async (trx) => {
@@ -45,22 +43,37 @@ export class StockEntriesService {
         select: {
           current_stock: true,
           item_code: true,
+          batch_id: true,
         },
         where: {
-          OR: data.entry_details.map(ed => {
+          OR: data.entry_details.map((ed) => {
             return {
               item_code: ed.item_code,
-            }
+            };
           }),
         },
       });
 
       await trx.stockLedger.createMany({
         data: data.entry_details.map((ed) => {
-          const lastStock = lastStocks.find(cs => cs.item_code === ed.item_code)?.current_stock ?? 0;
+          const lastStock =
+            lastStocks.find((cs) => {
+              return (
+                cs.item_code === ed.item_code && cs.batch_id == ed.batch_id
+              );
+            })?.current_stock;
+
+            if (lastStock === undefined) {
+              throw new NotFoundException(`batch ${ed.batch_id} not found for item ${ed.item_code}.`);
+            }
+
+          if (data.type === StockEntryType.OUT && (lastStock - ed.qty) < 0) {
+            throw new ConflictException('stock is less than quantity out.');
+          }
           return {
             batch_id: ed.batch_id,
-            current_stock: lastStock + (data.type === StockEntryType.IN ? ed.qty : -ed.qty),
+            current_stock:
+              lastStock + (data.type === StockEntryType.IN ? ed.qty : -ed.qty),
             item_code: ed.item_code,
             last_stock: lastStock,
             qty_in: data.type === StockEntryType.IN ? ed.qty : null,
