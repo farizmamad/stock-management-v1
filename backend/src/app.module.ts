@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { ItemsModule } from './items/items.module';
 import { ConfigModule } from '@nestjs/config';
 import { StockEntriesModule } from './stock-entries/stock-entries.module';
+import { StockLedgersModule } from './stock-ledgers/stock-ledgers.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { StockEntriesModule } from './stock-entries/stock-entries.module';
     }),
     ItemsModule,
     StockEntriesModule,
+    StockLedgersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
