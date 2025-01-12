@@ -21,6 +21,12 @@ Tech stack:
 2. Stock Entry
 3. Report Stock Ledger
 
+# requirements
+1. Node.js
+2. NPM package manager
+
 # Getting Started
 1. Clone the repository
-2. 
+2. go to the `backend` directory and do npm install. 
+3. go to the `frontend` directory and do npm install.
+4. 
