@@ -1,0 +1,12 @@
+model StockLedger {
+  id String @id @default(uuid())
+  item Item @relation(fields: [item_code], references: [item_code])
+  item_code String
+  batch BatchItem @relation(fields: [batch_id], references: [batch_id])
+  batch_id String
+  tanggal DateTime @default(now())
+  last_stock Int
+  qty_in Int?
+  qty_out Int?
+  current_stock Int
+}
