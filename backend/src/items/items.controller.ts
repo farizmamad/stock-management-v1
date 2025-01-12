@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { PaginationInputDto } from 'src/utils/pagination/pagination.dto';
 import { CreateItemDto } from './dto/create-item.dto';
-import { FindAllItemDto } from './dto/find-all-item.dto';
+import { FindAllItemsDto } from './dto/find-all-items.dto';
 import { ItemsService } from './items.service';
 import { ErrorsInterceptor } from 'src/interceptors/error.interceptor';
 import { PaginationQuery } from 'src/utils/pagination/pagination.query';
@@ -25,7 +25,7 @@ export class ItemsController {
   }
 
   @Get()
-  findAll(@Query() query: FindAllItemDto & PaginationQuery) {
+  findAll(@Query() query: FindAllItemsDto & PaginationQuery) {
     const paginationInput = new PaginationInputDto(query);
     let where = undefined;
     if (query.search) {
@@ -34,7 +34,7 @@ export class ItemsController {
           { item_code: { contains: query.search } },
           { name: { contains: query.search } },
         ],
-      }
+      };
     }
     return this.itemService.findAll({
       where,

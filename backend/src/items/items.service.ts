@@ -6,19 +6,18 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class ItemsService {
   constructor(private prisma: PrismaService) {}
 
-  create(data: Prisma.ItemCreateInput) {
-    return this.prisma.item.create({ data });
+  async create(data: Prisma.ItemCreateInput) {
+    return await this.prisma.item.create({ data });
   }
 
-  findAll(params: {
+  async findAll(params: {
     skip?: number;
     take?: number;
     where?: Prisma.ItemWhereInput;
     orderBy?: Prisma.ItemOrderByWithRelationInput;
   }) {
-    return this.prisma.item.findMany({
+    return await this.prisma.item.findMany({
       select: {
-        id: true,
         item_code: true,
         name: true,
         uom: true,
