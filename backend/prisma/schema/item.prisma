@@ -1,0 +1,6 @@
+model Item {
+  id String @default(uuid()) @id
+  item_code String @unique
+  name String
+  uom String
+}
