@@ -14,6 +14,7 @@ export class StockLedgersService {
   }) {
     return await this.prisma.stockLedger.findMany({
       select: {
+        id: true,
         item_code: true,
         batch_id: true,
         tanggal: true,

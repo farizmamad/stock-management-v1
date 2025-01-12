@@ -33,6 +33,9 @@ export class StockEntriesController {
       where,
       skip: paginationInput.skip,
       take: paginationInput.take,
+      orderBy: {
+        tanggal: 'asc',
+      },
     });
   }
 }
