@@ -1,4 +1,5 @@
 import { StockEntry, StockEntryDetail } from '@/types/stock-entry';
+import { CTAButton } from '@/ui/CTAButton';
 import { StockEntryDetailTable } from '@/ui/dashboard/stock-entry/StockEntryDetailTable';
 import { StockEntryTable } from '@/ui/dashboard/stock-entry/StockEntryTable';
 
@@ -16,9 +17,12 @@ export default async function StockEntryPage() {
   }
   return (
     <>
-      <h1 className="text-gray-900 text-xl"><strong>Stock Entries</strong></h1>
+      <div className="flex justify-between">
+        <h1 className="text-gray-900 self-center text-xl"><strong>Stock Entries</strong></h1>
+        <CTAButton text={'Create new entry'} />
+      </div>
       <StockEntryTable data={stockEntries} />
-      <h1 className="text-gray-900 text-xl"><strong>Details</strong></h1>
+      <h1 className="text-gray-900 self-center text-xl py-2"><strong>Details</strong></h1>
       <StockEntryDetailTable data={stockEntriesDetails} />
     </>
   );

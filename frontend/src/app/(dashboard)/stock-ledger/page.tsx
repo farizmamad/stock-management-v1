@@ -6,7 +6,7 @@ export default async function StockLedgerPage() {
   const stockLedgers: StockLedger[] = await data.json();
   return (
     <>
-      <h1 className="text-gray-900 text-xl"><strong>Stock Ledger</strong></h1>
+      <h1 className="text-gray-900 self-center py-2 text-xl"><strong>Stock Ledger</strong></h1>
       <StockLedgerTable data={stockLedgers} />
     </>
   );

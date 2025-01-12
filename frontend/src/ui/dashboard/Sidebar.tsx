@@ -33,7 +33,7 @@ export const Sidebar = () => {
 
   return (
     <aside className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0">
-      <div className="h-full px-3 py-4 overflow-y-auto dark:bg-gray-800">
+      <div className="h-full px-3 py-4 overflow-y-auto">
         <ul className="space-y-2 font-medium">
         {menu.map(item => {
           const LinkIcon = item.icon;
@@ -43,9 +43,9 @@ export const Sidebar = () => {
                 key={item.key}
                 href={item.key}
                 className={clsx(
-                  'flex py-3 grow items-center justify-start gap-4 rounded-md p-3 text-sm text-gray-50 font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3',
+                  'flex py-3 grow items-center justify-start gap-4 rounded-md p-3 text-sm text-gray-50 font-medium hover:bg-gray-700 md:flex-none md:justify-start md:p-2 md:px-3',
                   {
-                    'bg-sky-100 text-blue-600': pathname === item.key,
+                    'bg-sky-700 text-blue-600': pathname === item.key,
                   },
                 )}
               >
