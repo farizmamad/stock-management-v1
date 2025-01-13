@@ -1,3 +1,4 @@
+import { convertDateDisplay } from '@/lib/utils';
 import { StockLedger } from '@/types/stock-ledger';
 
 export function StockLedgerTable({ data }: { data: StockLedger[] }) {
@@ -40,7 +41,7 @@ export function StockLedgerTable({ data }: { data: StockLedger[] }) {
                             {d.batch_id}
                         </td>
                         <td className="px-6 py-4">
-                            {d.tanggal}
+                            {convertDateDisplay(d.tanggal)}
                         </td>
                         <td className="px-6 py-4">
                             {d.last_stock}

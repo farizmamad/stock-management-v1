@@ -1,6 +1,5 @@
 import Link from 'next/link';
 
-
 export function CTAButton({ text, url }: { text: string, url?: string }) {
   return (
     <Link

@@ -1,3 +1,4 @@
+import { convertDateDisplay } from '@/lib/utils';
 import { StockEntryDetail } from '@/types/stock-entry';
 
 export function StockEntryDetailTable({ data }: { data: StockEntryDetail[] }) {
@@ -43,7 +44,7 @@ export function StockEntryDetailTable({ data }: { data: StockEntryDetail[] }) {
                             {d.batch_id}
                         </td>
                         <td className="px-6 py-4">
-                            {d.expiry_date}
+                            {convertDateDisplay(d.expiry_date)}
                         </td>
                         <td className="px-6 py-4">
                             {d.qty}

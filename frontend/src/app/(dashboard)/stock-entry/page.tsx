@@ -19,7 +19,7 @@ export default async function StockEntryPage() {
     <>
       <div className="flex justify-between">
         <h1 className="text-gray-900 self-center text-xl"><strong>Stock Entries</strong></h1>
-        <CTAButton text={'Create new entry'} />
+        <CTAButton text={'Create new entry'} url={'stock-entry/create'} />
       </div>
       <StockEntryTable data={stockEntries} />
       <h1 className="text-gray-900 self-center text-xl py-2"><strong>Details</strong></h1>

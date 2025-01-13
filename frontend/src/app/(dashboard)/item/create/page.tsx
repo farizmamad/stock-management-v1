@@ -18,7 +18,7 @@ export default function CreateItemPage() {
   return (
     <form action={formAction}>
       <PageTitle text={'Create New Item'} />
-      <p aria-live="polite" className="sr-only" role="status">
+      <p className="mt-2 text-sm text-red-500" key={state.message}>
         {state?.message}
       </p>
       <InputField
@@ -27,8 +27,8 @@ export default function CreateItemPage() {
         placeholder="item_code"
         type="text"
         error={
-          state.errors?.item_code &&
-          state.errors.item_code.map((error: string) => (
+          state?.errors?.item_code &&
+          state?.errors.item_code.map((error: string) => (
             <p className="mt-2 text-sm text-red-500" key={error}>
               {error}
             </p>
@@ -41,8 +41,8 @@ export default function CreateItemPage() {
         placeholder="name"
         type="text"
         error={
-          state.errors?.name &&
-          state.errors.name.map((error: string) => (
+          state?.errors?.name &&
+          state?.errors.name.map((error: string) => (
             <p className="mt-2 text-sm text-red-500" key={error}>
               {error}
             </p>
@@ -55,8 +55,8 @@ export default function CreateItemPage() {
         placeholder="uom"
         type="text"
         error={
-          state.errors?.uom &&
-          state.errors.uom.map((error: string) => (
+          state?.errors?.uom &&
+          state?.errors.uom.map((error: string) => (
             <p className="mt-2 text-sm text-red-500" key={error}>
               {error}
             </p>

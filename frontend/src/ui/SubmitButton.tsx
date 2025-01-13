@@ -1,5 +1,3 @@
-import { FormStatus } from 'react-dom';
-
 
 export function SubmitButton({ text, pending }: { text: string, pending: boolean }) {
   return (
