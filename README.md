@@ -22,15 +22,17 @@ Tech stack:
 3. Report Stock Ledger
 
 # requirements
-1. Node.js
-2. NPM package manager
+1. [Node.js](https://nodejs.org/en/download/current)
+2. [NPM package manager](https://nodejs.org/en/download/current)
+3. [SQLite](https://www.sqlite.org/download.html)
 
-# Getting Started
-1. Clone the repository
+# Getting Started in Local Development
+1. Clone the repository.
 2. go to the `backend` directory
-4. do npm install. 
-5. duplicate .env.example, then rename to .env
-6. run `npm run start:dev`
+3. do npm install. 
+4. duplicate .env.example, then rename to .env
+5. if this is your first time using this repository, run command `npx prisma migrate dev` to apply migrations to the database
+6. run `npm run start:dev`. The backend server will serve at `http://localhost:3000` (if the backend port uses the default = 3000)
 7. go to the `frontend` directory
 8. do npm install.
 9. duplicate .env.local.example, then rename to .env.local
