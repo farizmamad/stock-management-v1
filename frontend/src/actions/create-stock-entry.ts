@@ -10,11 +10,10 @@ const CreateStockEntrySchema = z.object({
   tanggal: z.string().date(),
   type: z.enum(['IN', 'OUT']),
   entry_details: z.array(z.object({
-    entry_detail_id: z.string(),
-    item_code: z.string(),
-    batch_id: z.string(),
-    expiry_date: z.string().date(),
-    qty: z.number().int(),
+    item_code: z.string({ required_error: 'item_code: required' }),
+    batch_id: z.string({ required_error: 'batch_id: required' }),
+    expiry_date: z.string({ required_error: 'expiry_date: required' }).date(),
+    qty: z.coerce.number({ required_error: 'qty: required' }).int(),
   })),
 });
 
@@ -45,9 +44,7 @@ export async function createStockEntry(
       message: 'invalid input',
     }
   }
-
-  console.log(JSON.stringify(validatedFields.data));
-
+  
   const resp = await fetch(`${process.env.BACKEND_URL}/stock-entries`, {
     method: 'post',
     headers: {
@@ -59,6 +56,7 @@ export async function createStockEntry(
   if (!resp.ok) {
     return await resp.json();
   }
+
   revalidatePath('/stock-entry');
   redirect('/stock-entry');
 }

@@ -9,7 +9,7 @@ import { InputField } from '@/ui/InputField';
 import { PageTitle } from '@/ui/PageTitle';
 import { StockEntrySelectField } from '@/ui/SelectField';
 import { SubmitButton } from '@/ui/SubmitButton';
-import { ChangeEventHandler, useActionState, useState } from 'react';
+import { useActionState, useState } from 'react';
 import { useFormStatus } from 'react-dom';
 
 const initialState: StockEntryAPIResponse = {
@@ -24,7 +24,6 @@ export default function CreateStockEntryPage() {
     setEntryDetails([
       ...entryDetails,
       {
-        entry_detail_id: '',
         item_code: '',
         batch_id: '',
         expiry_date: new Date(),
@@ -57,6 +56,7 @@ export default function CreateStockEntryPage() {
       {/* Stock Entry Fields */}
       <InputField
         id={'entry_id'}
+        name={'entry_id'}
         label={'Entry ID'}
         placeholder=""
         type="text"
@@ -71,9 +71,9 @@ export default function CreateStockEntryPage() {
       />
       <DatePickerField
         id={'tanggal'}
+        name={'tanggal'}
         label={'Tanggal'}
         placeholder=""
-        type="date"
         error={
           state?.errors?.tanggal &&
           state?.errors.tanggal.map((error: string) => (
@@ -112,7 +112,8 @@ export default function CreateStockEntryPage() {
             <h4><strong>Detail {index + 1}</strong></h4>
             <InputField
               id={`item_code_${index}`}
-              label={'Item Code'}
+              name={`item_code`}
+              label={'Item Code: (TODO: get list of available item code from API)'}
               placeholder=""
               type="text"
               value={detail.item_code}
@@ -123,9 +124,10 @@ export default function CreateStockEntryPage() {
                 <></>
               }
             />
-          <InputField
+            <InputField
               id={`batch_id_${index}`}
-              label={'Batch ID'}
+              name={`batch_id`}
+              label={'Batch ID: (TODO: get list of available Batch ID from the chosen item code)'}
               placeholder=""
               type="text"
               value={detail.batch_id}
@@ -138,9 +140,9 @@ export default function CreateStockEntryPage() {
             />
             <DatePickerField
               id={`expiry_date_${index}`}
+              name={`expiry_date`}
               label={'Expiry Date'}
               placeholder=""
-              type="date"
               value={detail.expiry_date}
                 onChange={(e) =>
                   handleDetailChange(index, 'expiry_date', e.target.value)
@@ -151,6 +153,7 @@ export default function CreateStockEntryPage() {
             />
             <InputField
               id={`qty_${index}`}
+              name={`qty`}
               label={'Quantity'}
               placeholder=""
               type="number"
@@ -168,7 +171,7 @@ export default function CreateStockEntryPage() {
         <InFormActionButton text={'Add Detail'} onClick={handleAddDetail} color={'blue'} />
       </div>
 
-      <SubmitButton text={'Create new item'} pending={useFormStatus().pending} />
+      <SubmitButton text={'Create new entry'} pending={useFormStatus().pending} />
     </form>
   );
 }
