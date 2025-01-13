@@ -27,6 +27,12 @@ Tech stack:
 
 # Getting Started
 1. Clone the repository
-2. go to the `backend` directory and do npm install. 
-3. go to the `frontend` directory and do npm install.
-4. 
+2. go to the `backend` directory
+4. do npm install. 
+5. duplicate .env.example, then rename to .env
+6. run `npm run start:dev`
+7. go to the `frontend` directory
+8. do npm install.
+9. duplicate .env.local.example, then rename to .env.local
+10. run `npm run dev`
+11. open your browser. Go to url `http://localhost:3001` (if the frontend port uses the default = 3001)
