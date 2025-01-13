@@ -1,0 +1,12 @@
+model StockEntryDetail {
+  entry_detail_id Int @id @default(autoincrement())
+  entry StockEntry @relation(fields: [entry_id], references: [entry_id])
+  entry_id String
+  item Item @relation(fields: [item_code], references: [item_code])
+  item_code String
+  batch BatchItem @relation(fields: [batch_id], references: [batch_id])
+  batch_id String
+  expiry_date DateTime
+  qty Int
+  created_at DateTime @default(now())
+}

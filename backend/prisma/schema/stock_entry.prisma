@@ -1,0 +1,13 @@
+model StockEntry {
+  id String @default(uuid()) @id
+  entry_id String @unique
+  tanggal DateTime
+  type StockEntryType
+  entry_details StockEntryDetail[]
+  created_at DateTime @default(now())
+}
+
+enum StockEntryType {
+  IN
+  OUT
+}

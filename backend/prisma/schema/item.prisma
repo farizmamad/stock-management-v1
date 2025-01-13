@@ -1,0 +1,10 @@
+model Item {
+  id String @default(uuid()) @id
+  item_code String @unique
+  name String
+  uom String
+  batches BatchItem[]
+  stock_entry_details StockEntryDetail[]
+  stock_ledgers StockLedger[]
+  created_at DateTime @default(now())
+}

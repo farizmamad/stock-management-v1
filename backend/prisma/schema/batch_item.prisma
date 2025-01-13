@@ -1,0 +1,10 @@
+model BatchItem {
+  id String @id @default(uuid())
+  batch_id String @unique
+  item Item @relation(fields: [item_code], references: [item_code])
+  item_code String
+  expiry_date DateTime
+  stock_entry_details StockEntryDetail[]
+  stock_ledgers StockLedger[]
+  created_at DateTime @default(now())
+}
