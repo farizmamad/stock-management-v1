@@ -8,16 +8,16 @@ export function StockLedgerTable({ data }: { data: StockLedger[] }) {
         <thead className="text-xs text-gray-700 uppercase bg-gray-50">
             <tr>
                 <th scope="col" className="px-6 py-3">
-                    Item Code
-                </th>
-                <th scope="col" className="px-6 py-3">
-                    Batch ID
-                </th>
-                <th scope="col" className="px-6 py-3">
                     Tanggal
                 </th>
                 <th scope="col" className="px-6 py-3">
-                    Last Stock
+                    Batch ID (should this be shown?)
+                </th>
+                <th scope="col" className="px-6 py-3">
+                    Item Code
+                </th>
+                <th scope="col" className="px-6 py-3">
+                    Item Name
                 </th>
                 <th scope="col" className="px-6 py-3">
                     Qty In
@@ -35,16 +35,16 @@ export function StockLedgerTable({ data }: { data: StockLedger[] }) {
                 return (
                     <tr className="bg-white border-b" key={d.id}>
                         <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                            {d.item_code}
+                            {convertDateDisplay(d.tanggal)}
                         </th>
                         <td className="px-6 py-4">
                             {d.batch_id}
                         </td>
                         <td className="px-6 py-4">
-                            {convertDateDisplay(d.tanggal)}
+                            {d.item_code}
                         </td>
                         <td className="px-6 py-4">
-                            {d.last_stock}
+                            {d.item.name}
                         </td>
                         <td className="px-6 py-4">
                             {d.qty_in}
