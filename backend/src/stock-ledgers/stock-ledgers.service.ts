@@ -22,6 +22,11 @@ export class StockLedgersService {
         qty_in: true,
         qty_out: true,
         current_stock: true,
+        item: {
+          select: {
+            name: true,
+          },
+        },
       },
       ...params,
     });
